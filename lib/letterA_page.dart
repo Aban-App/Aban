@@ -1,41 +1,31 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:aban_app/learn_a.dart';
+import 'package:aban_app/write_a.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'lessons_page.dart';
-
-class LessonPageA extends StatelessWidget {
+import 'custom_appbar.dart';
+class LessonPageA extends StatefulWidget {
   const LessonPageA({Key? key}) : super(key: key);
+  @override
+  _LessonPageA createState() => new _LessonPageA();
+}
+class _LessonPageA extends State<LessonPageA> {
+  String imageLink = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.light,
-          backgroundColor: Color(0xFF7CC5CB),
-          toolbarHeight: 70,
-          // leading: RaisedButton(
-          //               textColor: Color(0xFFFFFFFF),
-          //               color: Color(0xFFFAC963),
-          //               child: Text(
-          //                 "الوالدين",
-          //                 style: TextStyle(
-          //                   fontSize: 27,
-          //                   color: Color(0xFF003C47),
-          //                   // fontWeight: FontWeight.bold,
-          //                 ),
-          //               ),
-          //               onPressed: () {},
-          //               shape: RoundedRectangleBorder(
-          //                   borderRadius: BorderRadius.circular(30.0),
-          //                   side: BorderSide(
-          //                     color: Color(0xFF48B5B5),
-          //                   )),
-          //             ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20.0),
+            brightness: Brightness.light,
+            backgroundColor: Color(0xFF7CC5CB),
+            toolbarHeight: 70,
+            title: CustomAppBar(imageLink: imageLink,),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(20.0),
+              ),
             ),
-          ),
         ),
         body: SafeArea(
           child: Container(
@@ -71,7 +61,7 @@ class LessonPageA extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {Navigator.push( context, MaterialPageRoute(builder: (context) => WriteA()),);},
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(250, 300),
                         primary: Color(0xFFfac963),
@@ -108,7 +98,7 @@ class LessonPageA extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LearnA()));},
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(250, 300),
                         primary: Color(0xFFfac963),

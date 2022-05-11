@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:aban_app/childLogin.dart';
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'lessons_page.dart';
@@ -6,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'addChild_page.dart';
-
+import 'package:aban_app/getId.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,6 +21,11 @@ class _LoginPage extends State<LoginPage>{
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;
   late String errorMessage;
+  @override
+  void initState() {
+    errorMessage = '';
+    super.initState();
+  }
   late String email, password;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +62,12 @@ class _LoginPage extends State<LoginPage>{
                       ),
                       padding: EdgeInsets.all(0),
                       child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'الرجاء ادخال عنوان البريد الالكتروني';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.emailAddress,
                         textAlign: TextAlign.center,
                         onChanged: (value) {
@@ -81,6 +95,12 @@ class _LoginPage extends State<LoginPage>{
                     ),
                     padding: EdgeInsets.all(0),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'الرجاء ادخال كلمة المرور';
+                        }
+                        return null;
+                      },
                       obscureText: true,
                       textAlign: TextAlign.center,
                       // validator: (value) {
@@ -105,8 +125,16 @@ class _LoginPage extends State<LoginPage>{
                       ),
                     ),
                   ),
+                  Center(
+                    child: Text(errorMessage,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20,
+                    ),),
+                  ),
                 ],
                 ),
+
                 SizedBox(height: 40,),
                 Container(
                   width: 250,
@@ -123,16 +151,26 @@ class _LoginPage extends State<LoginPage>{
                     color: Colors.white,
                     minWidth: double.infinity,
                     onPressed: () async {
-                      setState(() {
-                        showProgress = true;
-                      });
+                      Future _hasChild() async {
+                        QuerySnapshot<Map<String, dynamic>> _query =
+                        await FirebaseFirestore.instance.collection('Child').get();
+                        if (_query.docs.isNotEmpty) {
+                          // Collection exits
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChildLogin()));
+                          return true;
+                        } else {
+                          // Collection not exits
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AddChildPage()));
+                          return false;
+                        }
+                      }
                       try {
                         final newUser = await _auth.signInWithEmailAndPassword(
                             email: email, password: password);
                         print(newUser.toString());
                         if (newUser != null) {
                           print("Login Successfull");
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AddChildPage()));
+                          _hasChild();
                           Fluttertoast.showToast(
                               msg: "تم تسجيل الدخول بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
@@ -145,8 +183,33 @@ class _LoginPage extends State<LoginPage>{
                             showProgress = false;
                           });
                         }
-                      } catch (e) {}
-                    },
+                        //errorMessage = '';
+                      } on FirebaseAuthException catch (e) {
+                        switch (e.code) {
+                          case "invalid-email":
+                            errorMessage = "عنوان البريد الإلكتروني غير صالح.";
+                            break;
+                          case "user-disabled":
+                            errorMessage =
+                            "تم تعطيل المستخدم صاحب هذا البريد الإلكتروني.";
+                            break;
+                          case "user-not-found":
+                            errorMessage =
+                            "لا يوجد مستخدم بهذا البريد الإلكتروني .";
+                            break;
+                          case "wrong-password":
+                            errorMessage = "كلمة المرور الخاصة بك خاطئة.";
+                            break;
+                          case "ERROR_INVALID_CREDENTIAL":
+                            errorMessage = "البيانات المدخلة خاطئة";
+                            break;
+                          default:
+                            errorMessage = "حدث خطأ غير معروف.";
+                        }
+                      }
+                      setState(() { //errorMessage = '';
+                      });
+                      },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
@@ -185,4 +248,3 @@ class _LoginPage extends State<LoginPage>{
     );
   }
 }
-

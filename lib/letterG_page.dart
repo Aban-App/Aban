@@ -1,41 +1,32 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:aban_app/learn_g.dart';
+import 'package:aban_app/write_g.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'lessons_page.dart';
+import 'custom_appbar.dart';
 
-class LessonPageG extends StatelessWidget {
+class LessonPageG extends StatefulWidget {
   const LessonPageG({Key? key}) : super(key: key);
+  @override
+  _LessonPageG createState() => new _LessonPageG();
+}
+class _LessonPageG extends State<LessonPageG> {
+  String imageLink = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.light,
-          backgroundColor: Color(0xFF7CC5CB),
-          toolbarHeight: 70,
-          // leading: RaisedButton(
-          //               textColor: Color(0xFFFFFFFF),
-          //               color: Color(0xFFFAC963),
-          //               child: Text(
-          //                 "الوالدين",
-          //                 style: TextStyle(
-          //                   fontSize: 27,
-          //                   color: Color(0xFF003C47),
-          //                   // fontWeight: FontWeight.bold,
-          //                 ),
-          //               ),
-          //               onPressed: () {},
-          //               shape: RoundedRectangleBorder(
-          //                   borderRadius: BorderRadius.circular(30.0),
-          //                   side: BorderSide(
-          //                     color: Color(0xFF48B5B5),
-          //                   )),
-          //             ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20.0),
+            brightness: Brightness.light,
+            backgroundColor: Color(0xFF7CC5CB),
+            toolbarHeight: 70,
+            title: CustomAppBar(imageLink: imageLink,),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(20.0),
+              ),
             ),
-          ),
         ),
         body: SafeArea(
           child: Container(
@@ -76,7 +67,8 @@ class LessonPageG extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {Navigator.push( context, MaterialPageRoute(builder: (context) => WriteG()),);
+                      },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
@@ -126,7 +118,7 @@ class LessonPageG extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LearnG()));},
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),

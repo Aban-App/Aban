@@ -4,39 +4,32 @@ import 'login.dart';
 import 'letterA_page.dart';
 import 'letterB_page.dart';
 import 'letterG_page.dart';
+import 'custom_appbar.dart';
+import 'letterD_page.dart';
 
 class PlanetChildPage extends StatefulWidget {
   const PlanetChildPage({Key? key}) : super(key: key);
+
   @override
   _PlanetChildPageWidgetState createState() => _PlanetChildPageWidgetState();
 }
+
 class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
+  String imageLink = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   brightness: Brightness.light,
-      //   backgroundColor: Color(0xFF7CC5CB),
-      //   toolbarHeight: 70,
-      //   leading: RaisedButton(
-      //     textColor: Color(0xFFFFFFFF),
-      //     color: Color(0xFFFAC963),
-      //     child: Text(
-      //       "الوالدين",
-      //       style: TextStyle(
-      //         fontSize: 27,
-      //         color: Color(0xFF003C47),
-      //         // fontWeight: FontWeight.bold,
-      //       ),
-      //     ),
-      //     onPressed: () {},
-      //   ),
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.vertical(
-      //       bottom: Radius.circular(20.0),
-      //     ),
-      //   ),
-      // ),
+      appBar: AppBar(
+          brightness: Brightness.light,
+          backgroundColor: Color(0xFF7CC5CB),
+          toolbarHeight: 70,
+          title: CustomAppBar(imageLink: imageLink,),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20.0),
+            ),
+          ),
+      ),
       body: Center(
         child: Container(
           height: 350,
@@ -60,16 +53,15 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                       ),
                       Container(
                           decoration: BoxDecoration(
-                            //shape:
+                              //shape:
+                              ),
+                          child: Image.asset('Assets/img12.png') //صورة الكتب
                           ),
-                          child: Image.asset(
-                              'Assets/img12.png') //صورة الكتب
-                      ),
                     ],
                   ),
-                  onPressed: () {},
-                  style:
-                  ElevatedButton.styleFrom(
+                  onPressed: () {Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LessonPageD()));},
+                  style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                         side: BorderSide(
@@ -101,16 +93,17 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                       ),
                       Container(
                           decoration: BoxDecoration(
-                            //shape:
+                              //shape:
+                              ),
+                          child: Image.asset('Assets/img3.png') //صورة الكتب
                           ),
-                          child: Image.asset(
-                              'Assets/img3.png') //صورة الكتب
-                      ),
                     ],
                   ),
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LessonPageG()));},
-                  style:
-                  ElevatedButton.styleFrom(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LessonPageG()));
+                  },
+                  style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                         side: BorderSide(
@@ -142,16 +135,17 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                       ),
                       Container(
                           decoration: BoxDecoration(
-                            //shape:
+                              //shape:
+                              ),
+                          child: Image.asset('Assets/img9.png') //صورة الكتب
                           ),
-                          child: Image.asset(
-                              'Assets/img9.png') //صورة الكتب
-                      ),
                     ],
                   ),
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LessonPageB()));},
-                  style:
-                  ElevatedButton.styleFrom(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LessonPageB()));
+                  },
+                  style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                         side: BorderSide(
@@ -183,16 +177,17 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                       ),
                       Container(
                           decoration: BoxDecoration(
-                            //shape:
+                              //shape:
+                              ),
+                          child: Image.asset('Assets/img5.png') //صورة الكتب
                           ),
-                          child: Image.asset(
-                              'Assets/img5.png') //صورة الكتب
-                      ),
                     ],
                   ),
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LessonPageA()));},
-                  style:
-                  ElevatedButton.styleFrom(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LessonPageA()));
+                  },
+                  style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                         side: BorderSide(

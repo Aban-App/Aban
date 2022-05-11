@@ -1,32 +1,30 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:aban_app/learn_b.dart';
-import 'package:aban_app/write_b.dart';
+import 'package:aban_app/learn_d.dart';
+import 'package:aban_app/write_d.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'lessons_page.dart';
 import 'custom_appbar.dart';
 
-class LessonPageB extends StatefulWidget {
-  const LessonPageB({Key? key}) : super(key: key);
+class LessonPageD extends StatefulWidget {
+  const LessonPageD({Key? key}) : super(key: key);
   @override
-  _LessonPageB createState() => new _LessonPageB();
+  _LessonPageD createState() => new _LessonPageD();
 }
-class _LessonPageB extends State<LessonPageB> {
+class _LessonPageD extends State<LessonPageD> {
   String imageLink = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            brightness: Brightness.light,
-            backgroundColor: Color(0xFF7CC5CB),
-            toolbarHeight: 70,
-            title: CustomAppBar(imageLink: imageLink,),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(20.0),
-              ),
+          brightness: Brightness.light,
+          backgroundColor: Color(0xFF7CC5CB),
+          toolbarHeight: 70,
+          title: CustomAppBar(imageLink: imageLink,),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20.0),
             ),
+          ),
         ),
         body: SafeArea(
           child: Container(
@@ -67,7 +65,9 @@ class _LessonPageB extends State<LessonPageB> {
                         ),
                       ],
                     ),
-                    onPressed: () {Navigator.push( context, MaterialPageRoute(builder: (context) => WriteB()),);},
+                    onPressed: () {
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => WriteD()),);
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
@@ -100,7 +100,7 @@ class _LessonPageB extends State<LessonPageB> {
                               ),
                             ),
                             child: Image.asset(
-                              'Assets/baa.png',
+                              'Assets/dal.png',
                             ) //صورة الكتب
                         ),
                         SizedBox(
@@ -117,7 +117,7 @@ class _LessonPageB extends State<LessonPageB> {
                         ),
                       ],
                     ),
-                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LearnB()));},
+                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LearnD()));},
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),

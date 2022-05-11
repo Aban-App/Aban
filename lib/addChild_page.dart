@@ -1,8 +1,8 @@
-
+import 'package:aban_app/getId.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'login.dart';
 import 'lessons_page.dart';
+import 'custom_appbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddChildPage extends StatefulWidget {
   const AddChildPage({Key? key}) : super(key: key);
@@ -10,6 +10,13 @@ class AddChildPage extends StatefulWidget {
   _AddChildPageWidgetState createState() => _AddChildPageWidgetState();
 }
 class _AddChildPageWidgetState extends State<AddChildPage> {
+  String imageLink = '';
+  userInfo i = userInfo();
+  onButtonPressed(String value) {
+    setState(() {imageLink = value;});
+  }
+  final controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +28,7 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
               //  crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //row 0 back arrow
-                // Row(
-                //   children: [ Image.asset('assets/images/back arrow(100 × 100 px).png')],
-                // ),
-                //row1 ما اسم طفلك
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -36,24 +38,19 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
                         color: Color(0xFF003C47),
                         // fontWeight: FontWeight.bold,
                       ),
-                    )
-                  ],
-                ),
-                // row2 textfieald اسم الطفل
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // children: [
-                  //   TextField(
-                  //     decoration: InputDecoration(
-                  //         border: InputBorder.none,
-                  //   )
-                  //   )
-                  // ],
-                ),
-                // row3 text الشخصية المناسبة
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                    ),
+                    Container(
+                      height: 70,
+                      width: 350,
+                      child: TextField(
+                        controller: controller,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                      ),
+                    ),
                     Text(
                       "ما الشخصية المناسبة لطفلك؟",
                       style: TextStyle(
@@ -61,10 +58,9 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
                         color: Color(0xFF003C47),
                         // fontWeight: FontWeight.bold,
                       ),
-                    )
+                    ),
                   ],
                 ),
-                // row4 to choose avatar
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -73,34 +69,56 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
                       child: Wrap(
                         spacing: 25,
                         children: [
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.black,
-                            child: CircleAvatar(
-                              radius: 50, //radius is 50
-                              backgroundColor: Colors.white,
-                              backgroundImage:
-                              AssetImage('Assets/img16.png'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.black,
-                            child: CircleAvatar(
-                              radius: 100,
-                              backgroundColor: Colors.white,
-                              backgroundImage:
-                              AssetImage('Assets/img20.png'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.black,
+                          GestureDetector(
+                            onTap: () {
+                              onButtonPressed('Assets/img16.png');
+                              print(imageLink);
+                              //builder: (context) => CustomAppBar(imageLink: imageLink,);
+                            },
                             child: CircleAvatar(
                               radius: 50,
-                              backgroundColor: Colors.white,
-                              backgroundImage:
-                              AssetImage('Assets/img17.png'),
+                              backgroundColor: Colors.black,
+                              child: CircleAvatar(
+                                radius: 50, //radius is 50
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                AssetImage('Assets/img16.png'),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              onButtonPressed('Assets/img20.png');
+                              print(imageLink);
+                              //builder: (context) => CustomAppBar(imageLink: imageLink,);
+                            },
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.black,
+                              child: CircleAvatar(
+                                radius: 100,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                AssetImage('Assets/img20.png'),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              onButtonPressed('Assets/img17.png');
+                              print(imageLink);
+                              //final profile_image = await Navigator.push(context, MaterialPageRoute(builder: (context) => CustomAppBar(imageLink: imageLink)));
+                              //builder: (context) => CustomAppBar(imageLink: imageLink,);
+                            },
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.black,
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                AssetImage('Assets/img17.png'),
+                              ),
                             ),
                           ),
                         ],
@@ -127,7 +145,11 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
                             // fontWeight: FontWeight.bold,
                           ),
                         ),
-                        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage()));},
+                        onPressed: () {
+                          final name = controller.text;
+                          i.createChild(name: name, imageLink: imageLink);
+                          print(name);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage()));},
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                             side: BorderSide(
@@ -144,4 +166,33 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
       ),
     );
   }
+}
+// class DatabaseService {
+//   final String uid;
+//   DatabaseService({ this.uid});
+//
+//   final CollectionReference childCollection = FirebaseFirestore.instance.collection('children');
+//
+//   Future updateUserData(String name, String image) async {
+//     return await childCollection.doc(uid).setData({
+//       'name': name,
+//       'image': image,
+//     });
+//   }
+// }
+class parent {
+  parent({required this.name, this.id});
+  final String name;
+  final id;
+
+  void addChild(String childName, String image){
+    print("added child $childName");
+  }
+  void deleteChild(String childName){
+    print("child $childName was deleted");
+  }
+  modifyChildAccount(String childName, String image){
+    print("child new name is $childName");
+  }
+
 }

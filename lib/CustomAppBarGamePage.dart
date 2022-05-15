@@ -52,7 +52,7 @@ class CustomAppBarGamePage extends StatelessWidget {
           SizedBox(
             width: 300.0,
           ),
-          Text("اسم الطفل"),
+          Text("سارة"),
           SizedBox(width: 30,),
           CircleAvatar(
               radius: 25.0,

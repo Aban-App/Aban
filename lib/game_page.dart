@@ -1,5 +1,7 @@
 //Game PAGE
 // ignore_for_file: prefer_const_constructors
+import 'package:aban_app/game/game.dart';
+import 'package:aban_app/game/gameClass.dart';
 import 'package:flutter/material.dart';
 import 'CustomAppBarGamePage.dart';
 
@@ -10,6 +12,7 @@ class Gamepage extends StatefulWidget {
 }
 
 class _GamepageWidgetState extends State<Gamepage> {
+  Game i = Game();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +52,48 @@ class _GamepageWidgetState extends State<Gamepage> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                final point = 10;
+                                final gameValue = 5;
+                                void displayGame() {
+                                if (i.checkPoint(point)) {
+                                //navigate to game
+                                //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>ColorGame()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ColorGame()));
+                                //update point
+                                i.updatePoint(point, gameValue);
+                                print(point);
+                                } else {
+                                // //pop up msg
+                                // showAlertDialog(BuildContext context) {
+                                //   Widget okButton = FlatButton(
+                                //   child: Text("حسنًا"),
+                                //   onPressed: () {
+                                //   Navigator.of(context).pop();
+                                //   },
+                                //   );
+                                //   // Create AlertDialog
+                                //   AlertDialog alert = AlertDialog(
+                                //   title: Text("Simple Alert"),
+                                //   content: Text("ليس لديك نقاط كافية"),
+                                //   actions: [
+                                //   okButton,
+                                //   ],
+                                //   );
+                                //   // show the dialog
+                                //   showDialog(
+                                //   context: context,
+                                //   builder: (BuildContext context) {
+                                //   return alert;
+                                //   },
+                                //   );
+                                //   showAlertDialog(context);}
+                                }
+                                }
+                                displayGame();},
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => ColorGame()));},
                               child: Text(
-                                "ألعب 5",
+                                "ألعب ",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

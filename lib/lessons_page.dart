@@ -8,14 +8,15 @@ import 'custom_appbar.dart';
 import 'letterD_page.dart';
 
 class PlanetChildPage extends StatefulWidget {
-  const PlanetChildPage({Key? key}) : super(key: key);
+  PlanetChildPage({Key? key, name, image}) : super(key: key);
 
   @override
   _PlanetChildPageWidgetState createState() => _PlanetChildPageWidgetState();
 }
 
 class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
-  String imageLink = '';
+  var image;
+  var name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
           brightness: Brightness.light,
           backgroundColor: Color(0xFF7CC5CB),
           toolbarHeight: 70,
-          title: CustomAppBar(imageLink: imageLink,),
+          title: CustomAppBar(),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20.0),

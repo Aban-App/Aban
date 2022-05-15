@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'custom_appbar.dart';
 
 class WriteA extends StatelessWidget {
-  String imageLink = '';
   //const WriteA({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class WriteA extends StatelessWidget {
           brightness: Brightness.light,
           backgroundColor: Color(0xFF7CC5CB),
           toolbarHeight: 70,
-          title: CustomAppBar(imageLink: imageLink,),
+          title: CustomAppBar(),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20.0),

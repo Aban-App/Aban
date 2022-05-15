@@ -18,7 +18,7 @@ class LearnB extends StatelessWidget {
         brightness: Brightness.light,
         backgroundColor: Color(0xFF7CC5CB),
         toolbarHeight: 70,
-        title: CustomAppBar(imageLink: '',),
+        title: CustomAppBar(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20.0),

@@ -1,16 +1,20 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:aban_app/childLogin.dart';
 import 'package:aban_app/parent.dart';
 import 'package:flutter/material.dart';
 import 'game_page.dart';
 
 class CustomAppBar extends StatefulWidget {
-  final String imageLink;
-  CustomAppBar({ required this.imageLink});
-//String get imageLink => '';
+  CustomAppBar({Key? key, name, image}) : super(key: key);
 @override
   _CustomAppBar createState() => new _CustomAppBar();
 }
 class _CustomAppBar extends State<CustomAppBar> {
+  var image;
+  var name;
+  //var image = getCurrentImage();
+  // late final ChildLogin data;
+  // CustomAppBar({this.data});
   @override
   Widget build(BuildContext context) {
     return Row(children: [
@@ -69,12 +73,12 @@ class _CustomAppBar extends State<CustomAppBar> {
           SizedBox(
             width: 300.0,
           ),
-          Text("اسم الطفل"),
+          Text(name??'الاسم'),
           SizedBox(width: 30,),
           CircleAvatar(
               radius: 25.0,
               backgroundColor: Colors.white,
-              child: Image.asset('Assets/img16.png',
+              child: Image.asset(image?? 'Assets/img17.png',
                 //'${widget.imageLink}',
                 // imageLink,
                   height: 50, width: 50),

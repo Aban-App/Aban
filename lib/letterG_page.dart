@@ -13,7 +13,6 @@ class LessonPageG extends StatefulWidget {
   _LessonPageG createState() => new _LessonPageG();
 }
 class _LessonPageG extends State<LessonPageG> {
-  String imageLink = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class _LessonPageG extends State<LessonPageG> {
             brightness: Brightness.light,
             backgroundColor: Color(0xFF7CC5CB),
             toolbarHeight: 70,
-            title: CustomAppBar(imageLink: imageLink,),
+            title: CustomAppBar(),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(20.0),

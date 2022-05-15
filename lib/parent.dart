@@ -1,10 +1,12 @@
 import 'package:aban_app/addChild_page.dart';
+import 'package:aban_app/childLogin.dart';
 import 'package:aban_app/getId.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:aban_app/account.dart';
+import 'package:aban_app/progress.dart';
 class parent extends StatefulWidget{
   @override
   _parent createState() => new _parent();
@@ -12,6 +14,7 @@ class parent extends StatefulWidget{
 
 class _parent extends State<parent>{
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Child').snapshots();
+  userInfo i = userInfo();
   List userChildList = [];
   late TextEditingController controller;
   String newName = '';
@@ -65,7 +68,7 @@ class _parent extends State<parent>{
                               // fontWeight: FontWeight.bold,
                             ),
                           ),
-                          onPressed: () {//Navigator.push(context, MaterialPageRoute(builder: (context) => const Gamepage()),);
+                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ChildLogin()));
                             },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0),
@@ -188,6 +191,19 @@ class _parent extends State<parent>{
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget> [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => progress()));
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: Image.asset('Assets/trophy.png',
+                                          height: 50,
+                                          width: 50,
+                                          fit: BoxFit.contain
+                                      ),
+                                    ),
+                                  ),
                                   IconButton(
                                     icon: Icon(Icons.edit),
                                     onPressed: () async {
@@ -216,10 +232,10 @@ class _parent extends State<parent>{
                                       setState(() {
                                         this.newName = newName;
                                       });
+                                      late var id = i.getCurrentUID();
                                       Future _editName() async {
                                         try {
-                                          await  FirebaseFirestore.instance
-                                              .collection("Child")
+                                          await  FirebaseFirestore.instance.collection('parent').doc('$id').collection('child')
                                               .doc(userChildList[index]['ID'])
                                               .update({"name": newName});
                                         } catch (e){
@@ -232,10 +248,10 @@ class _parent extends State<parent>{
                                   IconButton(
                                     icon: Icon(Icons.delete),
                                     onPressed: () {
+                                      late var id = i.getCurrentUID();
                                       Future deleteChild() async{
                                       try {
-                                      await  FirebaseFirestore.instance
-                                          .collection("Child")
+                                      await  FirebaseFirestore.instance.collection('parent').doc('$id').collection('child')
                                           .doc(userChildList[index]['ID'])
                                           .delete();
                                       }catch (e){
@@ -243,9 +259,6 @@ class _parent extends State<parent>{
                                       }}
                                       deleteChild();
                                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => super.widget));
-                                      // this.setState(() {
-                                      //   Navigator.pop(context);
-                                      // });
                                     },
                                   ),
                                 ],

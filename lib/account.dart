@@ -1,4 +1,7 @@
+import 'package:aban_app/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:aban_app/passwordchange.dart';
 
 class account extends StatefulWidget {
   const account({Key? key}) : super(key: key);
@@ -68,7 +71,7 @@ class _accountState extends State<account> {
                           color: Color(0xff003C47),
                           fontSize: 20,
                         ),),
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => CheckParent()));},
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
@@ -112,7 +115,14 @@ class _accountState extends State<account> {
                           color: Color(0xff003C47),
                           fontSize: 20,
                         ),),
-                      onPressed: () {},
+                      onPressed: () {
+                        FirebaseAuth auth = FirebaseAuth.instance;
+                        signOut() async {
+                          await auth.signOut();
+                        }
+                        signOut();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),

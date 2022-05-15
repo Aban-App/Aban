@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:aban_app/custom_appbar.dart';
 import 'package:aban_app/getId.dart';
 import 'package:aban_app/lessons_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:aban_app/parent.dart';
 
 class ChildLogin extends StatefulWidget {
   const ChildLogin({Key? key}) : super(key: key);
@@ -11,7 +13,16 @@ class ChildLogin extends StatefulWidget {
 }
 
 class _ChildLoginWidgetState extends State<ChildLogin> {
+  userInfo i = userInfo();
   List userChildList = [];
+  String imageLink = '';
+  String childName = '';
+  onButtonPressed(String value) {
+    setState(() {imageLink = value;});
+  }
+  onButtonPressed2(String value) {
+    setState(() {childName = value;});
+  }
   void initState() {
     super.initState();
     fetchDatabaseList();
@@ -54,7 +65,7 @@ class _ChildLoginWidgetState extends State<ChildLogin> {
                         // fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => parent()));},
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
                         side: BorderSide(
@@ -88,7 +99,28 @@ class _ChildLoginWidgetState extends State<ChildLogin> {
                       itemCount: userChildList.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage()));},
+                          onTap: () {
+                              getCurrentImage() {
+                                onButtonPressed(userChildList[index]['image']);
+                                return imageLink;
+                              }
+                              var image = getCurrentImage();
+                              print(image);
+                              getCurrentName() {
+                                onButtonPressed2(userChildList[index]['name']);
+                                return childName;
+                              }
+                              var name = getCurrentName();
+                              print(name);
+                              //Navigator.push(context, MaterialPageRoute(builder: (context) => CustomAppBar(image: image, name: name,),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage(image: image, name: name,)));
+                            // final data = ChildLogin(
+                            //   name: name,
+                            //   image: image,
+                            // );
+                           //Navigator.push(context, MaterialPageRoute(builder: (context) => CustomAppBar(image)));
+                          // Navigator.push(context, data);
+                            },
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

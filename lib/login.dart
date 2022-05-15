@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage>{
+  userInfo i = userInfo();
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;
   late String errorMessage;
@@ -151,9 +152,10 @@ class _LoginPage extends State<LoginPage>{
                     color: Colors.white,
                     minWidth: double.infinity,
                     onPressed: () async {
+                      late var id = i.getCurrentUID();
                       Future _hasChild() async {
                         QuerySnapshot<Map<String, dynamic>> _query =
-                        await FirebaseFirestore.instance.collection('Child').get();
+                        await FirebaseFirestore.instance.collection('parent').doc('$id').collection('child').get();
                         if (_query.docs.isNotEmpty) {
                           // Collection exits
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ChildLogin()));

@@ -1,20 +1,6 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-
-// void main() => runApp(MyApp());
-//
-// class MyApp extends StatelessWidget {
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       theme: ThemeData(
-//         fontFamily: 'PressStart',
-//       ),
-//       home: ColorGame(),
-//     );
-//   }
-// }
 
 class ColorGame extends StatefulWidget {
   ColorGame({Key? key}) : super(key: key);
@@ -23,6 +9,8 @@ class ColorGame extends StatefulWidget {
 }
 
 class ColorGameState extends State<ColorGame> {
+  AssetsAudioPlayer audioPlayer =
+  AssetsAudioPlayer();
   /// Map to keep track of score
   final Map<String, bool> score = {};
 
@@ -43,10 +31,20 @@ class ColorGameState extends State<ColorGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Score ${score.length} / 6'),
-          backgroundColor: Colors.pink),
+          title: Text(' النقاط ${score.length} / 6', style: TextStyle(fontSize: 40,),),
+          backgroundColor: Color(0xFF7CC5CB),
+      actions: [
+        IconButton(
+          iconSize: 50,
+          icon: Icon(Icons.question_mark),
+          onPressed: (){audioPlayer.open(Audio('Assets/audio/gameInstruction.mp3'),
+              autoStart: true);},
+        ),
+        SizedBox(width: 60,),
+      ],),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh),
+        backgroundColor: Color(0xFF7CC5CB),
+        child: Icon(Icons.refresh,),
         onPressed: () {
           setState(() {
             score.clear();
@@ -86,13 +84,14 @@ class ColorGameState extends State<ColorGame> {
         if (score[emoji] == true) {
           return Container(
             color: Colors.white,
-            child: Text('Correct!'),
+            child: Emoji(emoji: score[emoji] == true ? '✅' : emoji),
             alignment: Alignment.center,
             height: 80,
             width: 200,
           );
         } else {
-          return Container(color: choices[emoji], height: 80, width: 200);
+          return Container(color: choices[emoji], height: 80, width: 200,
+          );
         }
       },
       onWillAccept: (data) => data == emoji,

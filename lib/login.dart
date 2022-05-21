@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage>{
+  var userId;
   userInfo i = userInfo();
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;

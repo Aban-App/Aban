@@ -2,6 +2,7 @@
 
 import 'package:aban_app/learn_d.dart';
 import 'package:aban_app/write_d.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'custom_appbar.dart';
 
@@ -11,6 +12,7 @@ class LessonPageD extends StatefulWidget {
   _LessonPageD createState() => new _LessonPageD();
 }
 class _LessonPageD extends State<LessonPageD> {
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +67,8 @@ class _LessonPageD extends State<LessonPageD> {
                       ],
                     ),
                     onPressed: () {
+                      audioPlayer.open(Audio('Assets/audio/WD.m4a'),
+                          autoStart: true);
                       Navigator.push( context, MaterialPageRoute(builder: (context) => WriteD()),);
                     },
                     style: ElevatedButton.styleFrom(
@@ -75,7 +79,7 @@ class _LessonPageD extends State<LessonPageD> {
                             width: 2.0,
                           ),
                         ),
-                        fixedSize: Size(250, 300),
+                        fixedSize: Size(350, 400),
                         primary: Color(0xFFfac963),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 50, vertical: 20),
@@ -125,7 +129,7 @@ class _LessonPageD extends State<LessonPageD> {
                             width: 2.0,
                           ),
                         ),
-                        fixedSize: Size(250, 300),
+                        fixedSize: Size(350, 400),
                         primary: Color(0xFFfac963),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 50, vertical: 20),

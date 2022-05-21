@@ -62,14 +62,14 @@ class _accountState extends State<account> {
                         color: Color(0xffFAC963),
                       ),),
                   ),
-                  SizedBox(height: 40,),
+                  SizedBox(height: 90,),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(17.0),
                     child: ElevatedButton(
                       child: Text('تغيير كلمة السر',
                         style: TextStyle(
                           color: Color(0xff003C47),
-                          fontSize: 20,
+                          fontSize: 30,
                         ),),
                       onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => CheckParent()));},
                       style: ElevatedButton.styleFrom(
@@ -80,40 +80,18 @@ class _accountState extends State<account> {
                             width: 2.0,
                           ),
                         ),
-                        fixedSize: Size(230, 60),
+                        fixedSize: Size(300, 70),
                         primary: Color(0xFFEBFCFA),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      child: Text('مساعدة',
-                        style: TextStyle(
-                          color: Color(0xff003C47),
-                          fontSize: 20,
-                        ),),
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(
-                            color: Colors.teal,
-                            width: 2.0,
-                          ),
-                        ),
-                        fixedSize: Size(230, 60),
-                        primary: Color(0xFFEBFCFA),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(17.0),
                     child: ElevatedButton(
                       child: Text('تسجيل خروج',
                         style: TextStyle(
                           color: Color(0xff003C47),
-                          fontSize: 20,
+                          fontSize: 30,
                         ),),
                       onPressed: () {
                         FirebaseAuth auth = FirebaseAuth.instance;
@@ -131,7 +109,7 @@ class _accountState extends State<account> {
                             width: 2.0,
                           ),
                         ),
-                        fixedSize: Size(230, 60),
+                        fixedSize: Size(300, 70),
                         primary: Color(0xffE55C5E),
                       ),
                     ),

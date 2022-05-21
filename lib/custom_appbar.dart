@@ -40,10 +40,7 @@ class _CustomAppBar extends State<CustomAppBar> {
                     // fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () {Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => parent()),
-                );},
+                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => parent()),);},
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                     side: BorderSide(
@@ -53,34 +50,24 @@ class _CustomAppBar extends State<CustomAppBar> {
             ),
           ),
           SizedBox(
-            width:300.0,
+            width:400.0,
           ),
           IconButton(
             iconSize: 50,
             onPressed:() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Gamepage()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Gamepage()),);
             },
             icon: Image.asset('Assets/Nintendoswitchprocontroller.png'),
           ),
-          IconButton(
-            iconSize: 50,
-            onPressed:() {},
-            icon: Image.asset('Assets/Usdollarcircled.png'),
-          ),
           SizedBox(
-            width: 300.0,
+            width: 400.0,
           ),
-          Text(name??'الاسم'),
+          Text(name??'سارة'),
           SizedBox(width: 30,),
           CircleAvatar(
               radius: 25.0,
               backgroundColor: Colors.white,
               child: Image.asset(image?? 'Assets/img17.png',
-                //'${widget.imageLink}',
-                // imageLink,
                   height: 50, width: 50),
           ),
         ],

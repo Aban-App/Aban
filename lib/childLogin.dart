@@ -2,9 +2,13 @@
 import 'package:aban_app/custom_appbar.dart';
 import 'package:aban_app/getId.dart';
 import 'package:aban_app/lessons_page.dart';
+import 'package:aban_app/quiz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:aban_app/parent.dart';
+import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+//library globals;
 
 class ChildLogin extends StatefulWidget {
   const ChildLogin({Key? key}) : super(key: key);
@@ -15,13 +19,9 @@ class ChildLogin extends StatefulWidget {
 class _ChildLoginWidgetState extends State<ChildLogin> {
   userInfo i = userInfo();
   List userChildList = [];
-  String imageLink = '';
-  String childName = '';
+  String id = '';
   onButtonPressed(String value) {
-    setState(() {imageLink = value;});
-  }
-  onButtonPressed2(String value) {
-    setState(() {childName = value;});
+    setState(() {id = value;});
   }
   void initState() {
     super.initState();
@@ -88,6 +88,7 @@ class _ChildLoginWidgetState extends State<ChildLogin> {
             Image.asset(
               'Assets/img15.png',
               fit: BoxFit.cover,
+              height: 1150,
             ),
             Center(
               child: Wrap(
@@ -100,57 +101,62 @@ class _ChildLoginWidgetState extends State<ChildLogin> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                              getCurrentImage() {
-                                onButtonPressed(userChildList[index]['image']);
-                                return imageLink;
+                              getCurrentID() {
+                                onButtonPressed(userChildList[index]['ID']);
+                                return id;
                               }
-                              var image = getCurrentImage();
-                              print(image);
-                              getCurrentName() {
-                                onButtonPressed2(userChildList[index]['name']);
-                                return childName;
+                              var userID = getCurrentID();
+                              print(userID);
+                              final FirebaseAuth auth = FirebaseAuth.instance;
+                              getCurrentUID() {
+                                final FirebaseAuth auth = FirebaseAuth.instance;
+                                final User? user = auth.currentUser;
+                                final uid = user!.uid;
+                                return uid;
                               }
-                              var name = getCurrentName();
-                              print(name);
-                              //Navigator.push(context, MaterialPageRoute(builder: (context) => CustomAppBar(image: image, name: name,),));
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage(image: image, name: name,)));
-                            // final data = ChildLogin(
-                            //   name: name,
-                            //   image: image,
-                            // );
-                           //Navigator.push(context, MaterialPageRoute(builder: (context) => CustomAppBar(image)));
-                          // Navigator.push(context, data);
+                              var parentId = getCurrentUID();
+                              Future setCurrentChild({required String childId}) async {
+                                // creating child id with custom alphabet and length
+                                final docChild = FirebaseFirestore.instance.collection('parent').doc('$parentId').collection('current').doc('childid');
+                                final json = {
+                                  'id': childId,
+                                };
+                                await docChild.set(json);
+                              }
+                              setCurrentChild(childId: userID);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage()));
+
                             },
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                width: 150,
-                                height: 125,
+                                width: 200,
+                                height: 175,
                                 decoration: BoxDecoration(
                                   color: Color(0xFFFFFFFF),
                                   border: Border.all(
                                     color: Color(0xFFFAC963),
                                     width: 2,
                                   ),
-                                  borderRadius: BorderRadius.circular(70),
+                                  borderRadius: BorderRadius.circular(90),
                                 ),
                                 child: Column(
                                   children: <Widget>[
                                     SizedBox(height: 7,),
                                       CircleAvatar(
-                                        radius: 35.0,
+                                        radius: 50.0,
                                         backgroundColor: Colors.white,
                                         child: Image.asset(userChildList[index]['image'],
-                                            height: 120,
-                                            width: 120,
+                                            height: 200,
+                                            width: 200,
                                             fit:
                                             BoxFit.contain),
                                 ),
                                     Text(userChildList[index]['name'],
                                       style: TextStyle(
-                                          fontSize: 20,
-                                          color: Color(0xFFFAC963),
+                                          fontSize: 30,
+                                          color: Colors.black54,
                                           fontWeight: FontWeight.bold
                                         // fontWeight: FontWeight.bold,
                                       ),),

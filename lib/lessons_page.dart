@@ -1,3 +1,4 @@
+import 'package:aban_app/quiz.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'login.dart';
@@ -8,15 +9,12 @@ import 'custom_appbar.dart';
 import 'letterD_page.dart';
 
 class PlanetChildPage extends StatefulWidget {
-  PlanetChildPage({Key? key, name, image}) : super(key: key);
-
+  const PlanetChildPage({Key? key}) : super(key: key);
   @override
   _PlanetChildPageWidgetState createState() => _PlanetChildPageWidgetState();
 }
 
 class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
-  var image;
-  var name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +42,50 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                   child: Column(
                     children: [
                       Text(
+                        ' اختبار قصير',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            //shape:
+                          ),
+                          child: Image.asset('Assets/Quiz.png'),
+                        width: 150,
+                        height: 135,
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    //print(name);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => firstQ()));},
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Colors.teal,
+                          width: 2.0,
+                        ),
+                      ),
+                      fixedSize: Size(250, 350),
+                      primary: Color(0xFF003C47),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 20),
+                      textStyle: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.bold)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  child: Column(
+                    children: [
+                      Text(
                         ' د',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -56,11 +98,15 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                           decoration: BoxDecoration(
                               //shape:
                               ),
-                          child: Image.asset('Assets/img12.png') //صورة الكتب
+                          child: Image.asset('Assets/D.png'),
+                        width: 190,
+                        height: 170,
                           ),
                     ],
                   ),
-                  onPressed: () {Navigator.push(context,
+                  onPressed: () {
+                    //print(name);
+                    Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LessonPageD()));},
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -96,7 +142,7 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                           decoration: BoxDecoration(
                               //shape:
                               ),
-                          child: Image.asset('Assets/img3.png') //صورة الكتب
+                          child: Image.asset('Assets/J.png') //صورة الكتب
                           ),
                     ],
                   ),
@@ -138,7 +184,7 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                           decoration: BoxDecoration(
                               //shape:
                               ),
-                          child: Image.asset('Assets/img9.png') //صورة الكتب
+                          child: Image.asset('Assets/B.png') //صورة الكتب
                           ),
                     ],
                   ),
@@ -180,7 +226,7 @@ class _PlanetChildPageWidgetState extends State<PlanetChildPage> {
                           decoration: BoxDecoration(
                               //shape:
                               ),
-                          child: Image.asset('Assets/img5.png') //صورة الكتب
+                          child: Image.asset('Assets/A.png') //صورة الكتب
                           ),
                     ],
                   ),

@@ -41,6 +41,11 @@ class _parent extends State<parent>{
       });
     }
   }
+  String id = '';
+  onButtonPressed(String value) {
+    setState(() {id = value;});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,6 +177,8 @@ class _parent extends State<parent>{
                                       fontSize: 16,
                                       color: Colors.black,
                                   ),),
+                                trailing: Text('${userChildList[index]['points']}النقاط ',
+                                  style: TextStyle(fontSize: 25),),
                                 leading: CircleAvatar(
                                   radius: 35.0,
                                   backgroundColor: Colors.white,
@@ -182,17 +189,35 @@ class _parent extends State<parent>{
                                       BoxFit.contain
                                   ),
                                 ),
-                                trailing: Text('${userChildList[index]['points']}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                  ),),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget> [
                                   GestureDetector(
                                     onTap: () {
+                                      getCurrentID() {
+                                        onButtonPressed(userChildList[index]['ID']);
+                                        return id;
+                                      }
+                                      var userID = getCurrentID();
+                                      print(userID);
+                                      final FirebaseAuth auth = FirebaseAuth.instance;
+                                      getCurrentUID() {
+                                        final FirebaseAuth auth = FirebaseAuth.instance;
+                                        final User? user = auth.currentUser;
+                                        final uid = user!.uid;
+                                        return uid;
+                                      }
+                                      var parentId = getCurrentUID();
+                                      Future setCurrentChild({required String childId}) async {
+                                        // creating child id with custom alphabet and length
+                                        final docChild = FirebaseFirestore.instance.collection('parent').doc('$parentId').collection('currentprogress').doc('childid');
+                                        final json = {
+                                          'id': childId,
+                                        };
+                                        await docChild.set(json);
+                                      }
+                                      setCurrentChild(childId: userID);
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => progress()));
                                     },
                                     child: CircleAvatar(

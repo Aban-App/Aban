@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:aban_app/getId.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class progress extends StatefulWidget {
@@ -9,10 +11,38 @@ class progress extends StatefulWidget {
 }
 
 class _progressState extends State<progress> {
+  userInfo  i = userInfo();
+  late var parentId = i.getCurrentUID();
+  String childPoint = '';
+  Future<String> getCurrentChild() async {
+    var collection = FirebaseFirestore.instance.collection('parent').doc('$parentId').collection('currentprogress');
+    var docSnapshot = await collection.doc('childid').get();
+    Map<String, dynamic> data = docSnapshot.data()!;
+    var childID = data['id'];
+    var coll = FirebaseFirestore.instance.collection('parent').doc('$parentId').collection('child');
+    var docsnap = await coll.doc('$childID').get();
+    Map<String, dynamic> data1 = docsnap.data()!;
+    String points = await data1['points'].toString();
+      setState(() {
+      childPoint = points;
+      print(childPoint);
+      });
+    // ste();
+    // setState(() {
+    //   childPoint = points;
+    //   print(childPoint);
+    //   //Navigator.of(context).pop(childPoint);
+    // });
+    return points;
+  }
+  late var point = getCurrentChild();
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff003C47),
+      backgroundColor: Color(0xFFE6FFFF),
       appBar: AppBar(
         brightness: Brightness.light,
         backgroundColor: Color(0xFF7CC5CB),
@@ -38,17 +68,22 @@ class _progressState extends State<progress> {
               fontSize: 50,
               color: Color(0xffE55C5E),
             ),),
-            Text("الدروس",
+            Container(
+              child: Image.asset('Assets/grad.png'),
+              height: 300,
+              width: 300,
+            ),
+            Text("النقاط المكتسبة",
               style: TextStyle(
                 fontSize: 50,
-                color: Colors.white,
+                color: Color(0xFF003C47),
               ),),
-            Text("النقاط",
+            SizedBox(height: 20,),
+            Text('${childPoint}',
               style: TextStyle(
                 fontSize: 50,
-                color: Colors.white,
+                color: Color(0xFF003C47),
               ),),
-
           ],
         ),
       ),

@@ -2,6 +2,7 @@
 
 import 'package:aban_app/learn_b.dart';
 import 'package:aban_app/write_b.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'lessons_page.dart';
@@ -13,6 +14,7 @@ class LessonPageB extends StatefulWidget {
   _LessonPageB createState() => new _LessonPageB();
 }
 class _LessonPageB extends State<LessonPageB> {
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +68,10 @@ class _LessonPageB extends State<LessonPageB> {
                         ),
                       ],
                     ),
-                    onPressed: () {Navigator.push( context, MaterialPageRoute(builder: (context) => WriteB()),);},
+                    onPressed: () {
+                      audioPlayer.open(Audio('Assets/audio/WB.m4a'),
+                          autoStart: true);
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => WriteB()),);},
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
@@ -75,7 +80,7 @@ class _LessonPageB extends State<LessonPageB> {
                             width: 2.0,
                           ),
                         ),
-                        fixedSize: Size(250, 300),
+                        fixedSize: Size(350, 400),
                         primary: Color(0xFFfac963),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 50, vertical: 20),
@@ -125,7 +130,7 @@ class _LessonPageB extends State<LessonPageB> {
                             width: 2.0,
                           ),
                         ),
-                        fixedSize: Size(250, 300),
+                        fixedSize: Size(350, 400),
                         primary: Color(0xFFfac963),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 50, vertical: 20),

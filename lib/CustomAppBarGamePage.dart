@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:aban_app/parent.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarGamePage extends StatelessWidget {
@@ -31,7 +32,9 @@ class CustomAppBarGamePage extends StatelessWidget {
                     // fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> parent()));
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                     side: BorderSide(
@@ -44,13 +47,13 @@ class CustomAppBarGamePage extends StatelessWidget {
             width:300.0,
           ),
 
-          IconButton(
-            onPressed:() {},
-            iconSize: 50,
-            icon: Image.asset('Assets/Usdollarcircled.png'),
-          ),
+          // IconButton(
+          //   onPressed:() {},
+          //   iconSize: 50,
+          //   icon: Image.asset('Assets/Usdollarcircled.png'),
+          // ),
           SizedBox(
-            width: 300.0,
+            width: 500.0,
           ),
           Text("سارة"),
           SizedBox(width: 30,),

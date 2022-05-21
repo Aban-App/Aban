@@ -1,10 +1,12 @@
 
+import 'package:aban_app/quiz.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: RegisterPage(),
+      // getPages: [
+      //   GetPage(name: '/quiz', page: () => firstQ()),
+      // ],
     );
   }
 }
@@ -44,8 +49,8 @@ class RegisterPage extends StatelessWidget {
               child: Column(children: [
                 Container(
                 margin: EdgeInsets.fromLTRB(10, 50, 10, 75),
-                width: 440,
-                height: 250,
+                width: 800,
+                height: 350,
                 decoration: BoxDecoration(
                   color: Color(0xff003C47),
                   image: DecorationImage(
@@ -66,7 +71,7 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
                 pageButton(
-                  text: "التسجيل",
+                  text: "انشاء حساب",
                   press: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
                   },

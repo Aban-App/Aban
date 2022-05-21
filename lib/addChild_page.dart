@@ -149,7 +149,8 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
                           final name = controller.text;
                           i.createChild(name: name, imageLink: imageLink);
                           print(name);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage()));},
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetChildPage()));
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                             side: BorderSide(
@@ -158,7 +159,7 @@ class _AddChildPageWidgetState extends State<AddChildPage> {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

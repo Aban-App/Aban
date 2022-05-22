@@ -54,7 +54,7 @@ class WriteG extends StatelessWidget {
                               ],
                             ),
                             onPressed: () {
-                              audioPlayer.open(Audio('Assets/audio/writeInsruction,mp3'),
+                              audioPlayer.open(Audio('Assets/audio/writeInsruction.mp3'),
                                   autoStart: true);
                               showGeneralDialog(
                                 barrierLabel: 'label',
